@@ -1,0 +1,7 @@
+------ ukrpravda (заголовки) ------
+\s*<div\sclass="news\stab_item">\p{all}+?</a>\s*</div>\s*</div>\s*</div>\s*
+
+<div\\sclass=\"article\\sarticle(?:\\sarticle_[\\w]{1,6})?\">\\s*
+    <div\\sclass=\"article__time\">\\s*([0-9]{1,2}:[0-9]{1,2})\\s*</div>\\s*
+    <div\\sclass=\"article__title\">\\s*" +
+    <a\\shref=\"(.+?)\"(\\starget=\"_blank\")?>\\s*(?:<em>.+?</em>)?(\\p{all}+?)\\s*</a>\\s*</div>\\s*</div>

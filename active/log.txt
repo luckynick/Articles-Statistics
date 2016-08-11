@@ -36,3 +36,6 @@
 (10.07.2016  19:22:41) Work result: 188 articles for now.
 (10.07.2016  20:06:07) INFO: Work result: 190 articles for now.
 (10.07.2016  20:09:45) INFO: Work result: 190 articles for now.
+(11.07.2016  01:20:35) java.net.SocketTimeoutException: Read timed out
+(11.07.2016  05:45:25) java.net.SocketTimeoutException: Read timed out
+(11.07.2016  12:49:28) java.net.SocketTimeoutException: Read timed out

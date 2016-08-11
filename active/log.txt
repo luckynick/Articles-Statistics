@@ -39,3 +39,12 @@
 (11.07.2016  01:20:35) java.net.SocketTimeoutException: Read timed out
 (11.07.2016  05:45:25) java.net.SocketTimeoutException: Read timed out
 (11.07.2016  12:49:28) java.net.SocketTimeoutException: Read timed out
+(11.07.2016  13:46:08) ERROR: Failed to read new titles.
+(11.07.2016  13:46:09) INFO: Work result: 235 articles for now.
+(11.07.2016  13:48:26) ERROR: Failed to read new titles.
+(11.07.2016  13:48:45) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(11.07.2016  13:48:55) INFO: Work result: 236 articles for now.
+(11.07.2016  15:22:15) ERROR: Failed to read new titles.
+(11.07.2016  15:22:15) INFO: Work result: 247 articles for now.
+(11.07.2016  15:24:13) ERROR: Failed to read new titles.
+(11.07.2016  15:24:13) INFO: Work result: 247 articles for now.

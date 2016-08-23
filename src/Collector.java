@@ -12,20 +12,32 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.EnumMap;
 import java.util.GregorianCalendar;
 
 
 public class Collector
 {
-    static final String dataBasePath = "articles.txt";
-    static final String statisticsPath = "statistics.txt";
-    static final String logPath = "log.txt";
+    final String dataBasePath;
+    final String logPath;
+    private Date dateStored = Calendar.getInstance().getTime();
+
+    Collector(String dataBasePath, String logPath)
+    {
+        this.dataBasePath = dataBasePath;
+        this.logPath = logPath;
+    }
 
     volatile boolean execute = true;
     volatile int c = 0;
 
-
+    /**
+     * Start thread which tries to parse page, select titles and store them on top of data base
+     *
+     */
     public void collect()
     {
         Thread thr;
@@ -35,8 +47,6 @@ public class Collector
                 while(execute && c < 10)
                 {
                     execute = false;
-                    //as.backup(dataBasePath);
-
                     try
                     {
                         appendToDataBase(getNewTitles());
@@ -78,24 +88,28 @@ public class Collector
             writeToLog("ERROR: " + e.toString());
         }
         if(execute) writeToLog("ERROR: Failed to read new titles (overtime)");
-
-        //UniversalDetector.main(new String[]{"C:\\Users\\User\\IdeaProjects\\Test\\" + dataBasePath});
     }
 
+    /**
+     * Parse page and find titles of articles, collect them in String
+     * @return titles as integer text
+     * @throws IOException reasons - parse or encoding error
+     */
     String getNewTitles() throws IOException
     {
-        Document doc;
+        Document html;
+
         try
         {
-            doc = Jsoup.parse(new URL("http://www.pravda.com.ua/"), 500);
+            html = Jsoup.parse(new URL("http://www.pravda.com.ua/"), 1000);
         }
         catch (MalformedURLException e)
         {
-            e.printStackTrace();
+            writeToLog(e.toString());
             return "";
         }
-        doc.charset(Charset.forName("UTF-8"));
-        Elements els = doc.getElementsByAttributeValueStarting("class", "news tab_item");
+        html.charset(Charset.forName("UTF-8"));
+        Elements els = html.getElementsByAttributeValueStarting("class", "news tab_item");
         String fromInet = new String("".getBytes(), "UTF-8");
         for(Element el : els)
         {
@@ -109,6 +123,11 @@ public class Collector
         return fromInet;
     }
 
+    /**
+     * Add new titles on top data base
+     * @param newArticles new titles
+     * @throws IOException in cases of reading/writing to file
+     */
     void appendToDataBase(String newArticles) throws IOException
     {
         BufferedReader br;
@@ -157,11 +176,15 @@ public class Collector
         {
             if(s.charAt(i) == '\n') c++;
         }
-        System.out.println(c);
-        writeToLog("INFO: Work result: " + c + " articles for now.");
+        System.out.println(c + " titles");
+        writeToLog("INFO: Work result: " + c + " titles for now.");
     }
 
-    void writeToLog(String what)
+    /**
+     * Write comment of event to log file
+     * @param what description of event
+     */
+    public void writeToLog(String what)
     {
         DecimalFormat df = new DecimalFormat("00");
         GregorianCalendar c = new GregorianCalendar();
@@ -181,12 +204,25 @@ public class Collector
         }
     }
 
-    void backup(String what) throws IOException
+    /**
+     * Create copy of existing data base
+     * @param what data base path
+     */
+    void backup(String what)
     {
         Path p = Paths.get(what);
         String parts[] = what.split("\\.");
         Path backupPath = Paths.get(parts[0] + "-backup." + parts[1]);
-        if(Files.exists(backupPath)) Files.delete(backupPath);
+        if(Files.exists(backupPath)){
+            try
+            {
+                Files.delete(backupPath);
+            }
+            catch (IOException e)
+            {
+                writeToLog("ERROR: " + e.toString());
+            }
+        }
         try
         {
             Files.copy(p, backupPath);
@@ -196,5 +232,10 @@ public class Collector
             writeToLog("ERROR: " + e.toString());
         }
         writeToLog("INFO: " + dataBasePath + "backed up.");
+    }
+
+    public Date getDateStored()
+    {
+        return dateStored;
     }
 }

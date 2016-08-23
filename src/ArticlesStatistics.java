@@ -1,9 +1,17 @@
+import org.mozilla.universalchardet.UniversalDetector;
 
 public class ArticlesStatistics
 {
-    public static void main(String ... args)
+    static final String dataBasePath = "articles.txt";
+    static final String statisticsPath = "statistics.txt";
+    static final String logPath = "log.txt";
+
+    public static void main(String ... args) throws Exception
     {
-        Collector col = new Collector();
+        Collector col = new Collector(dataBasePath, logPath);
         col.collect();
+
+        //col.backup("active\\articles.txt");
+        //UniversalDetector.main(new String[]{"C:\\Users\\User\\IdeaProjects\\Test\\" + col.dataBasePath});
     }
 }

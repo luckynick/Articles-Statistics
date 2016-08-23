@@ -48,3 +48,55 @@
 (11.07.2016  15:22:15) INFO: Work result: 247 articles for now.
 (11.07.2016  15:24:13) ERROR: Failed to read new titles.
 (11.07.2016  15:24:13) INFO: Work result: 247 articles for now.
+(11.07.2016  15:33:05) INFO: Work result: 247 articles for now.
+(11.07.2016  19:16:23) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(11.07.2016  19:16:52) INFO: Work result: 292 articles for now.
+(11.07.2016  23:05:42) INFO: Work result: 302 articles for now.
+(11.07.2016  23:54:17) INFO: Work result: 304 articles for now.
+(12.07.2016  06:03:27) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(12.07.2016  06:03:38) INFO: Work result: 314 articles for now.
+(12.07.2016  13:31:03) INFO: Work result: 351 articles for now.
+(12.07.2016  14:08:48) INFO: Work result: 396 articles for now.
+(12.07.2016  18:54:10) INFO: Work result: 424 articles for now.
+(13.07.2016  01:08:57) INFO: Work result: 442 articles for now.
+(13.07.2016  09:59:34) INFO: Work result: 453 articles for now.
+(13.07.2016  16:35:20) INFO: Work result: 484 articles for now.
+(13.07.2016  18:45:29) INFO: Work result: 494 articles for now.
+(13.07.2016  23:21:54) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(13.07.2016  23:22:04) INFO: Work result: 508 articles for now.
+(14.07.2016  08:46:50) INFO: Work result: 520 articles for now.
+(14.07.2016  18:27:59) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(14.07.2016  18:28:09) INFO: Work result: 536 articles for now.
+(15.07.2016  05:54:43) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(15.07.2016  05:54:54) INFO: Work result: 555 articles for now.
+(15.07.2016  12:54:54) INFO: Work result: 582 articles for now.
+(15.07.2016  21:37:48) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(15.07.2016  21:38:00) INFO: Work result: 625 articles for now.
+(16.07.2016  05:56:22) INFO: Work result: 640 articles for now.
+(16.07.2016  15:57:40) INFO: Work result: 685 articles for now.
+(17.07.2016  10:09:31) INFO: Work result: 726 articles for now.
+(17.07.2016  18:17:53) INFO: Work result: 771 articles for now.
+(18.07.2016  06:01:56) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(18.07.2016  06:02:08) INFO: Work result: 801 articles for now.
+(18.07.2016  19:02:45) INFO: Work result: 849 articles for now.
+(19.07.2016  06:06:33) INFO: Work result: 869 articles for now.
+(19.07.2016  17:28:24) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(19.07.2016  17:28:35) INFO: Work result: 917 articles for now.
+(20.07.2016  10:42:08) INFO: Work result: 965 articles for now.
+(20.07.2016  16:47:39) INFO: Work result: 1013 articles for now.
+(20.07.2016  22:33:59) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(20.07.2016  22:34:09) INFO: Work result: 1028 articles for now.
+(21.07.2016  10:24:18) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(21.07.2016  10:24:29) INFO: Work result: 1044 articles for now.
+(21.07.2016  14:47:26) INFO: Work result: 1058 articles for now.
+(21.07.2016  17:46:42) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(21.07.2016  17:46:52) INFO: Work result: 1066 articles for now.
+(22.07.2016  05:38:38) INFO: Work result: 1092 articles for now.
+(22.07.2016  09:51:42) INFO: Work result: 1106 articles for now.
+(22.07.2016  21:38:53) INFO: Work result: 1154 articles for now.
+(23.07.2016  06:01:39) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(23.07.2016  06:01:50) WARNING: Try to read: 2. Problem: java.net.SocketTimeoutException: Read timed out
+(23.07.2016  06:02:00) INFO: Work result: 1170 articles for now.
+(23.07.2016  09:55:42) INFO: Work result: 1180 articles for now.
+(23.07.2016  12:34:56) INFO: Work result: 1194 articles for now.
+(23.07.2016  15:17:25) INFO: Work result: 1218 articles for now.

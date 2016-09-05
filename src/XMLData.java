@@ -12,16 +12,17 @@ public class XMLData
     {
         Article a1 = new Article(null, null);
         Article a2 = new Article(null, null);
-        a1.main(new String[]{""});
+        a1.main(new String[]{"", ""});
         ArrayList<URL> al1 = a1.urlArrayList;
         a1.urlArrayList = new ArrayList<>();
-        a2.main(new String[]{":only-child"});
+        a2.main(new String[]{"", ":only-child"});
         ArrayList<URL> al2 = a2.urlArrayList;
         for(Iterator<URL> it = al1.iterator(); it.hasNext(); )
         {
             URL temp = it.next();
             if(al2.contains(temp)) it.remove();
         }
+        System.out.println("\n\nMissing articles:");
         for(URL url : al1)
         {
             System.out.println(url);

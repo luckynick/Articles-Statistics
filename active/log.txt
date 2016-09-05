@@ -1,59 +1,3 @@
-(10.07.2016  15:21:21) New articles were written: 163 articles for now.
-(10.07.2016  15:23:32) New articles were written: 163 articles for now.
-(10.07.2016  15:24:19) New articles were written: 163 articles for now.
-(10.07.2016  15:24:29) New articles were written: 163 articles for now.
-(10.07.2016  15:24:39) New articles were written: 163 articles for now.
-(10.07.2016  15:24:49) New articles were written: 163 articles for now.
-(10.07.2016  15:39:57) New articles were written: 166 articles for now.
-(10.07.2016  15:40:7) New articles were written: 166 articles for now.
-(10.07.2016  15:40:17) New articles were written: 166 articles for now.
-(10.07.2016  15:40:28) New articles were written: 166 articles for now.
-(10.07.2016  15:40:38) New articles were written: 166 articles for now.
-(10.07.2016  15:41:48) Service started.
-(10.07.2016  15:41:49) New articles were written: 166 articles for now.
-(10.07.2016  15:41:59) New articles were written: 166 articles for now.
-(10.07.2016  15:42:9) New articles were written: 166 articles for now.
-(10.07.2016  15:59:23) Service started.
-(10.07.2016  15:59:24) File articles.txt not found.
-(10.07.2016  15:59:34) File articles.txt not found.
-(10.07.2016  15:59:44) File articles.txt not found.
-(10.07.2016  15:59:54) File articles.txt not found.
-(10.07.2016  16:00:04) File articles.txt not found.
-(10.07.2016  16:00:14) File articles.txt not found.
-(10.07.2016  16:00:24) File articles.txt not found.
-(10.07.2016  16:00:34) File articles.txt not found.
-(10.07.2016  16:00:44) File articles.txt not found.
-(10.07.2016  16:00:54) File articles.txt not found.
-(10.07.2016  16:01:04) File articles.txt not found.
-(10.07.2016  16:39:32) File articles.txt not found.
-(10.07.2016  16:42:06) New articles were written: 173 articles for now.
-(10.07.2016  16:42:10) New articles were written: 173 articles for now.
-(10.07.2016  16:48:02) New articles were written: 173 articles for now.
-(10.07.2016  16:51:49) Work result: 173 articles for now.
-(10.07.2016  16:57:49) Work result: 174 articles for now.
-(10.07.2016  17:55:47) java.net.SocketTimeoutException: Read timed out
-(10.07.2016  19:12:45) Work result: 187 articles for now.
-(10.07.2016  19:22:41) Work result: 188 articles for now.
-(10.07.2016  20:06:07) INFO: Work result: 190 articles for now.
-(10.07.2016  20:09:45) INFO: Work result: 190 articles for now.
-(11.07.2016  01:20:35) java.net.SocketTimeoutException: Read timed out
-(11.07.2016  05:45:25) java.net.SocketTimeoutException: Read timed out
-(11.07.2016  12:49:28) java.net.SocketTimeoutException: Read timed out
-(11.07.2016  13:46:08) ERROR: Failed to read new titles.
-(11.07.2016  13:46:09) INFO: Work result: 235 articles for now.
-(11.07.2016  13:48:26) ERROR: Failed to read new titles.
-(11.07.2016  13:48:45) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
-(11.07.2016  13:48:55) INFO: Work result: 236 articles for now.
-(11.07.2016  15:22:15) ERROR: Failed to read new titles.
-(11.07.2016  15:22:15) INFO: Work result: 247 articles for now.
-(11.07.2016  15:24:13) ERROR: Failed to read new titles.
-(11.07.2016  15:24:13) INFO: Work result: 247 articles for now.
-(11.07.2016  15:33:05) INFO: Work result: 247 articles for now.
-(11.07.2016  19:16:23) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
-(11.07.2016  19:16:52) INFO: Work result: 292 articles for now.
-(11.07.2016  23:05:42) INFO: Work result: 302 articles for now.
-(11.07.2016  23:54:17) INFO: Work result: 304 articles for now.
-(12.07.2016  06:03:27) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
 (12.07.2016  06:03:38) INFO: Work result: 314 articles for now.
 (12.07.2016  13:31:03) INFO: Work result: 351 articles for now.
 (12.07.2016  14:08:48) INFO: Work result: 396 articles for now.
@@ -100,3 +44,58 @@
 (23.07.2016  09:55:42) INFO: Work result: 1180 articles for now.
 (23.07.2016  12:34:56) INFO: Work result: 1194 articles for now.
 (23.07.2016  15:17:25) INFO: Work result: 1218 articles for now.
+(23.07.2016  19:36:29) INFO: Work result: 1233 articles for now.
+(23.07.2016  23:21:57) INFO: Work result: 1246 articles for now.
+(24.07.2016  09:29:16) INFO: Work result: 1260 articles for now.
+(24.07.2016  12:36:53) INFO: Work result: 1272 articles for now.
+(24.07.2016  16:58:33) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(24.07.2016  16:58:43) INFO: Work result: 1297 articles for now.
+(24.07.2016  17:59:24) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(24.07.2016  17:59:34) INFO: Work result: 1305 articles for now.
+(24.07.2016  19:52:17) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(24.07.2016  19:52:27) INFO: Work result: 1313 articles for now.
+(24.07.2016  21:22:08) INFO: Work result: 1320 articles for now.
+(24.07.2016  23:38:21) INFO: Work result: 1325 articles for now.
+(25.07.2016  06:01:00) INFO: Work result: 1335 articles for now.
+(25.07.2016  08:39:42) INFO: Work result: 1340 articles for now.
+(25.07.2016  11:24:37) INFO: Work result: 1349 articles for now.
+(25.07.2016  13:01:17) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(25.07.2016  13:01:28) INFO: Work result: 1358 articles for now.
+(25.07.2016  13:46:09) INFO: Work result: 1363 articles for now.
+(25.07.2016  18:47:22) INFO: Work result: 1389 articles for now.
+(26.07.2016  06:43:30) INFO: Work result: 1413 articles for now.
+(26.07.2016  16:03:46) ERROR: java.net.UnknownHostException: www.pravda.com.ua
+(26.07.2016  16:06:30) ERROR: java.net.UnknownHostException: www.pravda.com.ua
+(26.07.2016  16:13:09) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(26.07.2016  16:13:20) WARNING: Try to read: 2. Problem: java.net.SocketTimeoutException: Read timed out
+(26.07.2016  16:13:30) INFO: Work result: 1461 articles for now.
+(28.07.2016  20:32:21) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(28.07.2016  20:32:31) WARNING: Try to read: 2. Problem: java.net.SocketTimeoutException: Read timed out
+(28.07.2016  20:32:42) WARNING: Try to read: 3. Problem: java.net.SocketTimeoutException: Read timed out
+(28.07.2016  20:32:52) INFO: Work result: 1506 articles for now.
+(29.07.2016  05:59:44) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(29.07.2016  05:59:55) INFO: Work result: 1519 articles for now.
+(29.07.2016  19:43:17) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(29.07.2016  19:45:45) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(29.07.2016  19:46:14) INFO: Work result: 1564 articles for now.
+(30.07.2016  06:00:16) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(30.07.2016  06:00:26) INFO: Work result: 1585 articles for now.
+(30.07.2016  18:41:26) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(30.07.2016  18:41:37) INFO: Work result: 1630 articles for now.
+(31.07.2016  06:01:47) INFO: Work result: 1649 articles for now.
+(31.07.2016  18:34:35) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(31.07.2016  18:34:46) INFO: Work result: 1694 articles for now.
+(01.08.2016  05:57:39) INFO: Work result: 1717 articles for now.
+(01.08.2016  19:23:30) INFO: Work result: 1764 articles for now.
+(02.08.2016  06:02:23) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(02.08.2016  06:02:33) INFO: Work result: 1791 articles for now.
+(02.08.2016  15:04:38) INFO: Work result: 1832 articles for now.
+(02.08.2016  16:03:20) INFO: Work result: 1839 articles for now.
+(03.08.2016  10:00:31) INFO: Work result: 1884 articles for now.
+(03.08.2016  17:54:28) INFO: Work result: 1924 articles for now.
+(04.08.2016  08:54:28) INFO: Work result: 1948 articles for now.
+(04.08.2016  13:04:57) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(04.08.2016  13:05:07) INFO: Work result: 1959 articles for now.
+(04.08.2016  20:21:14) INFO: Work result: 1985 articles for now.
+(05.08.2016  05:54:23) INFO: Work result: 2003 articles for now.
+(05.08.2016  14:31:34) INFO: Work result: 2045 articles for now.

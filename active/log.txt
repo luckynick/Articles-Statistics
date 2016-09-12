@@ -99,3 +99,37 @@
 (04.08.2016  20:21:14) INFO: Work result: 1985 articles for now.
 (05.08.2016  05:54:23) INFO: Work result: 2003 articles for now.
 (05.08.2016  14:31:34) INFO: Work result: 2045 articles for now.
+(05.08.2016  19:05:27) INFO: Work result: 2073 articles for now.
+(06.08.2016  06:01:52) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(06.08.2016  06:02:04) INFO: Work result: 2093 articles for now.
+(06.08.2016  13:37:49) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(06.08.2016  13:37:59) INFO: Work result: 2136 articles for now.
+(06.08.2016  20:48:52) INFO: Work result: 2174 articles for now.
+(07.08.2016  06:06:03) INFO: Work result: 2192 articles for now.
+(07.08.2016  13:18:34) INFO: Work result: 2228 articles for now.
+(07.08.2016  17:24:48) INFO: Work result: 2259 articles for now.
+(07.08.2016  19:13:02) INFO: Work result: 2267 articles for now.
+(08.08.2016  05:44:10) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(08.08.2016  05:44:20) WARNING: Try to read: 2. Problem: java.net.SocketTimeoutException: Read timed out
+(08.08.2016  05:44:31) WARNING: Try to read: 3. Problem: java.net.SocketTimeoutException: Read timed out
+(08.08.2016  05:44:41) INFO: Work result: 2289 articles for now.
+(08.08.2016  12:24:56) INFO: Work result: 2316 articles for now.
+(08.08.2016  17:18:30) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(08.08.2016  17:18:40) INFO: Work result: 2364 articles for now.
+(08.08.2016  20:46:33) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(08.08.2016  20:46:43) INFO: Work result: 2376 articles for now.
+(09.08.2016  06:36:31) INFO: Work result: 2399 articles for now.
+(09.08.2016  13:58:09) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(09.08.2016  13:58:22) INFO: Work result: 2435 articles for now.
+(09.08.2016  18:16:28) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(09.08.2016  18:16:40) INFO: Work result: 2463 articles for now.
+(10.08.2016  09:13:56) INFO: Work result: 2493 articles for now.
+(11.08.2016  09:03:40) INFO: Work result: 2540 articles for now.
+(11.08.2016  17:25:49) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(11.08.2016  17:26:01) INFO: Work result: 2574 articles for now.
+(11.08.2016  20:29:27) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(11.08.2016  20:29:41) INFO: Work result: 2582 articles for now.
+(12.08.2016  05:54:38) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(12.08.2016  05:54:49) INFO: Work result: 2599 articles for now.
+(12.08.2016  11:47:43) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(12.08.2016  11:47:56) INFO: Work result: 2625 articles for now.

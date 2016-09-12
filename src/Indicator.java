@@ -1,16 +1,14 @@
-/**
- * Created by User on 05.09.2016.
- */
+
 public enum Indicator
 {
     /**
      * Object is complete with no issues
      */
-    SUCCESSFUL,
+    SUCCESS,
     /**
      * Object data has to be updated in next program run because it is not representative
      */
-    EARLY_DATA,
+    EARLY_DATA, //has to be represented!
     /**
      * Timeout reached while attempting to get article from web
      */
@@ -20,7 +18,15 @@ public enum Indicator
      */
     SELECTOR_ERROR,
     /**
-     * Date, time or author couldn't be parsed, format was wrong
+     * Date, time or author couldn't be parsed, data format was wrong
      */
-    PARSE_ERROR
+    PARSE_ERROR,
+    /**
+     * When no match with date or author pattern found
+     */
+    REGEX_PATTERN_ERROR,
+    /**
+     * Work on this article in next versions of program
+     */
+    SUSPENDED
 }

@@ -13,10 +13,7 @@ import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,26 +24,29 @@ public class Article
 
     public Collector col; //for logging
 
+    public static long articlesExeTime = 0;
     private Document doc;
-    private long start;
+    private String subSite;
 
+    //implement program's start time in controlling class
     private String title;
+    private String description;
     private Date datePublished;
     private URL url;
     private String type;
-    private String subSite;
     private String author;
-    private String[] topics;
     private int seen/* = -1*/, commented/* = -1*/;
-    private long loadTime = 0; //in millisec
+    private long loadTime = -1; //in millisec
+    private Map<String, URL> readAlso, topics;
     private Map<String, Integer> social;
-    private Indicator indicator = Indicator.SUCCESSFUL; //0 successful, -1 timeout, -2 selector query error, -3 parse error, 1 early data, 2
+    private Indicator indicator = Indicator.SUCCESS;
 
     @Deprecated
     public static void main(String args[]) throws Exception
     {
-        if(args.length != 2) args = new String[]{"", ""};
-        String testURL = "http://www.epravda.com.ua/cdn/cd1/2016/09/uroki-devalvacii/index.html"; //
+        long start = System.currentTimeMillis();
+
+        String testURL = "http://www.istpravda.com.ua/articles/2016/09/8/149190/"; //
         Collector testCollector = new Collector(null, null)
         {
             @Override
@@ -55,66 +55,61 @@ public class Article
                 System.out.println("\u001B[31m" + what + "\u001B[0m");
             }
         };
-        int duplicates = 0;
-        long start = System.currentTimeMillis();
-        if(true)
+        Article a = null;
+        if(false)
         {
-            ArrayList<URL> al = new ArrayList<>();
+            ArrayList<URL> failed = new ArrayList<>();
+            ArrayList<String> allURLs = new ArrayList<>();
             int success = 0, all = 0;
             String target = "http://www.pravda.com.ua/";
             Connection c = Jsoup.connect(target).userAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)" +
                     " Chrome/49.0.2623.87 Safari/537.36");
-            c.timeout(5000);
+            c.timeout(1000);
             Document d = c.get();
-            Elements els = d.select("div[class^=article]" + args[0] + " a[href]" + args[1] + ", " + // pravda
+            Elements els = d.select("div[class^=article] a[href], " + // pravda
                     "tr a[href], div[class^=post] a[href]"); // tabloid
-            for (Element e : els)
+            for(Element e : els)
+            {
+                String link;
+                String href = e.attr("href");
+                if (href.contains(target)) link = href;
+                else
+                {
+                    if (href.contains("http://")) link = href;
+                    else link = target + href.substring(1, href.length());
+                }
+                if(!allURLs.contains(link)) allURLs.add(link); //eliminate duplicates
+            }
+            for (String link : allURLs)
             {
                 all++;
-                Article a = null;
-                String link = null;
-                try
-                {
-                    String href = e.attr("href");
-                    if (href.contains(target)) link = href;
-                    else
-                    {
-                        if (href.contains("http://")) link = href;
-                        else link = target + href.substring(1, href.length());
-                    }
-                    if(link.contains("bzh.life")) continue;
-                    a = new Article(link, testCollector);
-                    if(a.datePublished != null) success++;
-                    if(urlArrayList.contains(a.url)) duplicates++;
-                    urlArrayList.add(a.url);
-                }
-                catch (NullPointerException exc)
-                {
-                    testCollector.writeToLog("Null pointer ex");
-                    al.add(new URL(link));
-                    continue;
-                }
-//            if(a != null && !a.author.equals("null")) System.out.println(a.author);
-                //if(a.datePublished == null) al.add(a);
+                a = new Article(link, testCollector);
+                if(a.indicator == Indicator.SUCCESS) success++;
+                else failed.add(new URL(link));
+                urlArrayList.add(a.url);
+                articlesExeTime += a.loadTime;
             }
+
             System.out.println("\n" + success + " of " + all + " succeded.\n\n");
-            System.out.println(duplicates + " duplicates");
             System.out.println("\nFailed articles:");
-            for(URL url : al)
+            for(URL url : failed)
             {
                 System.out.println(url.toString());
             }
         }
         else
         {
-            Article a = new Article(testURL, testCollector);
+            a = new Article(testURL, testCollector);
         }
-        System.out.println(System.currentTimeMillis() - start + " milliseconds");
+
+        System.out.println("Program executed in " + articlesExeTime + " milliseconds");
     }
 
     public Article(String url, Collector ob)
     {
         long start = System.currentTimeMillis();
+
+        if(url.contains("bzh.life")) indicator = Indicator.SUSPENDED; //bzh is slow and programs works wrong with it
         col = ob;
         try
         {
@@ -127,29 +122,45 @@ public class Article
         }
         try
         {
-            Connection c = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)" +
-                    " Chrome/49.0.2623.87 Safari/537.36");
-            c.timeout(5000);
-            doc = c.get();
+            if(indicator == Indicator.SUCCESS)
+            {
+                Connection c = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)" +
+                        " Chrome/49.0.2623.87 Safari/537.36");
+                c.timeout(4000); //5000
+                doc = c.get();
+            }
         }
         catch(SocketTimeoutException e)
         {
             col.writeToLog("Socket time out");
             indicator = Indicator.TIMEOUT;
-            return;
+//            return;
         }
         catch (IOException e)
         {
             col.writeToLog(e.getMessage());
             return;
         }
-        doc.charset(Charset.forName("UTF-8"));
-        acumulateData();
+        if(indicator == Indicator.SUCCESS)
+        {
+            doc.charset(Charset.forName("UTF-8"));
+            acumulateData();
+        }
 
         loadTime = System.currentTimeMillis() - start;
+
+        //test
+        System.out.println(url);
+        System.out.println(title);
+        System.out.println(type);
+        System.out.println(indicator.toString());
+        System.out.println(author);
+        System.out.println(datePublished);
+        System.out.println(loadTime + " milliseconds");
+        System.out.println();
     }
 
-    private void setTitleAndType(Elements inHead)
+    private void setOG(Elements inHead)
     {
         for(Element e: inHead)
         {
@@ -157,7 +168,37 @@ public class Article
             String value = atts.get("property");
             if(value.equals("og:title")) title = atts.get("content");
             if(value.equals("og:type")) type = atts.get("content");
+            if(value.equals("og:description")) description = atts.get("content");
         }
+    }
+
+    private void acumulateData()
+    {
+        ChangableString outerContent = new ChangableString("");
+        Elements inHead = doc.head().getElementsByTag("meta");
+        subSite = url.getHost();
+        setOG(inHead);
+        Element body = doc.body();
+
+        Element keyData = getKeyData(body);
+        if(keyData == null)
+        {
+            indicator = Indicator.SELECTOR_ERROR;
+            col.writeToLog("keyData is null, no elements found by query");
+            return;
+        }
+        datePublished = resolveDate(keyData.select("div.post_news__date, " + //pravda
+                "div.tit3, " +
+                "table div.source, " + // tabloid
+                "div.date1, " +
+                "span.dt2, " + //eurointegration
+                "div.bpost > span.bdate, " +
+                "div.dt1, " +
+                "div.section-responsive div.article-date > span + span")
+                .first(), outerContent);
+        author = resolveAuthor(outerContent);
+
+//        System.out.println(outerContent.toString());
     }
 
     private Element getKeyData(Element body)
@@ -207,14 +248,15 @@ public class Article
                 .replaceAll("(([Пп]онеділок)|([Вв]івторок)|([Сс]ереда)|([Чч]етвер)|([Пп]\'ятниця)|([Сс]убота)|([Нн]еділя)|" +
                         "([Пп]онедельник)|([Вв]торник)|([Сс]реда)|([Чч]етверг)|" +
                         "([Пп]ятница)|([Сс]уббота)|([Вв]оскресенье)),?\\s?", "");
-        Matcher universalMatcher = Pattern.compile("^(?:([0-9\\[\\]\\p{L}\\s,'№\"\\.\\p{Pd}]*?)(?:,?\\s))?" +
+        Matcher universalMatcher = Pattern.compile("(?:([\\p{Punct}0-9\\p{L}\\s’№\\p{Pd}]*)(?:,?\\s))?" +
                 "((?:[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}(?:,?\\s[0-9]{2}:[0-9]{2})?)|" +
                 "(?:(?:\\p{Lu}[\\p{Ll}']{5,8},\\s)?[0-9]{1,2}\\s\\p{L}{5,11},?\\s[0-9]{4}(?:,\\s[0-9]{2}:[0-9]{2})?))" +
-                "(?:(?:,?\\s)?([0-9\\[\\]\\p{L}\\s,'№\"\\.\\p{Pd}]*?))?$").matcher(text);
+                "(?:(?:,?\\s?)([\\p{Punct}0-9\\p{L}\\s’№\\p{Pd}]*))?").matcher(text);
         if(universalMatcher.find())
         {
             for(int i = 1; i < 4; i++)
             {
+                //System.out.println("group " + i + ": " + universalMatcher.group(i));
                 if(i == 2) timeString = universalMatcher.group(i);
                 else
                 {
@@ -225,8 +267,8 @@ public class Article
         }
         if(timeString == null)
         {
-            col.writeToLog("timeString is null\nWhole text: " + text + "\nOuter content: " + outerContent);
-            indicator = Indicator.PARSE_ERROR;
+            col.writeToLog("timeString is null\nWhole text: " + text);
+            indicator = Indicator.REGEX_PATTERN_ERROR;
             return null;
         }
 //        timeString = timeString.replaceAll(",\\s", " ").replaceFirst("\\p{Lu}[\\p{Ll}']{5,8},\\s", "").replaceAll(",", "");
@@ -252,7 +294,7 @@ public class Article
         if(datePattern == null)
         {
             col.writeToLog("Date can't be parsed. timeString:\n" + timeString);
-            indicator = Indicator.PARSE_ERROR;
+            indicator = Indicator.REGEX_PATTERN_ERROR;
             return null;
         }
         df = new SimpleDateFormat(datePattern, locUA);
@@ -273,42 +315,45 @@ public class Article
                 col.writeToLog("Neither ukrainian nor russian date format succeeded.");
             }
         }
-
         return d;
     }
 
-    private void resolveAuthor(String containsAuthor)
+    private String resolveAuthor(ChangableString containsAuthor)
     {
-        System.out.println(containsAuthor);
-    }
-
-    private void acumulateData()
-    {
-        //for testing
-        System.out.println(url);
-
-        ChangableString outerContent = new ChangableString("");
-        Elements inHead = doc.head().getElementsByTag("meta");
-        subSite = url.getHost();
-        setTitleAndType(inHead);
-        Element body = doc.body();
-
-        Element keyData = getKeyData(body);
-        if(keyData == null)
+        Matcher dividerMat = Pattern.compile("(\\p{all}*)\\|(\\p{all}*)").matcher(containsAuthor.toString());
+        Pattern nameSurnPat = Pattern.compile("(?:\\p{all}*?,?\\s?)" +
+                "((?:\\p{Lu}\\.)?\\p{Lu}[\\p{Ll}’']+(?:\\p{Pd}\\p{Lu}[\\p{Ll}’']+)?\\s" +
+                "(?:\\p{Lu}\\.)?\\p{Lu}[\\p{Ll}’']+(?:\\p{Pd}\\p{Lu}[\\p{Ll}’']+)?" +
+                "(?:,\\s(?:\\p{Lu}\\.)?\\p{Lu}[\\p{Ll}’']+(?:\\p{Pd}\\p{Lu}[\\p{Ll}’']+)?\\s" +
+                "(?:\\p{Lu}\\.)?\\p{Lu}[\\p{Ll}’']+(?:\\p{Pd}\\p{Lu}[\\p{Ll}’']+)?)*)" +
+                "(?:,?\\s?\\p{all}*?)");
+        String parts[] = new String[2];
+        String nameSurn = null;
+        if(dividerMat.find())
         {
-            indicator = Indicator.SELECTOR_ERROR;
-            col.writeToLog("keyData is null, no elements found by query");
-            return;
+            parts[0] = dividerMat.group(1);
+            parts[1] = dividerMat.group(2);
         }
-        datePublished = resolveDate(keyData.select("div.post_news__date, " + //pravda
-                "div.tit3, " +
-                "table div.source, " + // tabloid
-                "div.date1, span.dt2, " +
-                "div.bpost > span.bdate, " +
-                "div.dt1, " +
-                "div.section-responsive div.article-date > span + span")
-                .first(), outerContent);
-        resolveAuthor(outerContent.toString());
+        else
+        {
+            col.writeToLog("Can't divide containsAuthor. ContainsAuthor: \n" + containsAuthor);
+            indicator = Indicator.REGEX_PATTERN_ERROR;
+            return null;
+        }
+        boolean found = false;
+        for(int i = 0; i < parts.length; i++)
+        {
+            String s = parts[i];
+            Matcher mat = nameSurnPat.matcher(s);
+            if(mat.find())
+            {
+                found = true;
+                nameSurn = mat.group(1);
+                if(i == 0) containsAuthor.set(parts[1]);
+                else containsAuthor.set(parts[0]);
+            }
+        } //No pattern error possible. No match found means there is no author in string or format of author is strange
+        return nameSurn;
     }
 
     public void filterImportant(String content)
@@ -317,9 +362,24 @@ public class Article
         //if()
     }
 
+    /**
+     * Checks if indicators of Article are positive or negative
+     * @return true if article has errors, false if SUCCESS or SUSPENDED
+     */
+    public boolean error()
+    {
+        if(indicator == Indicator.SUCCESS || indicator == Indicator.SUSPENDED || indicator == Indicator.EARLY_DATA) return false;
+        else return true;
+    }
+
     public String getTitle()
     {
         return title;
+    }
+
+    public String getDescription()
+    {
+        return description;
     }
 
     public Date getDatePublished()
@@ -327,9 +387,14 @@ public class Article
         return datePublished;
     }
 
-    public String[] getTopics()
+    public Map<String, URL> getTopics()
     {
         return topics;
+    }
+
+    public Map<String, URL> getReadAlso()
+    {
+        return readAlso;
     }
 
     public int getSeen()
@@ -361,6 +426,11 @@ public class Article
     {
         return url;
     }
+
+    public long getLoadTime()
+    {
+        return loadTime;
+    }
 }
 
 class ChangableString
@@ -378,16 +448,13 @@ class ChangableString
         return str;
     }
 
-    String set(String what)
+    void set(String what)
     {
         str = what;
-        return str;
     }
 
     public String toString()
     {
         return str;
     }
-
-
 }

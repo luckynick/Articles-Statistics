@@ -133,3 +133,5 @@
 (12.08.2016  05:54:49) INFO: Work result: 2599 articles for now.
 (12.08.2016  11:47:43) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
 (12.08.2016  11:47:56) INFO: Work result: 2625 articles for now.
+(12.08.2016  19:28:37) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(12.08.2016  19:28:49) INFO: Work result: 2671 articles for now.

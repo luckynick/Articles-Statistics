@@ -1,3 +1,4 @@
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,10 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.EnumMap;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 
 public class Collector
@@ -49,7 +47,8 @@ public class Collector
                     execute = false;
                     try
                     {
-                        appendToDataBase(getNewTitles());
+//                        appendToDataBase(getNewTitles());
+                        appendToDataBase(getNewURLs()); //use URLs in new version of program
                     }
                     catch(SocketTimeoutException e)
                     {
@@ -121,6 +120,36 @@ public class Collector
             }
         }
         return fromInet;
+    }
+
+    String getNewURLs() throws IOException
+    {
+        String result = "";
+        ArrayList<String> allURLs = new ArrayList<>();
+        String target = "http://www.pravda.com.ua/";
+        Connection c = Jsoup.connect(target).userAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)" +
+                " Chrome/49.0.2623.87 Safari/537.36");
+        c.timeout(1000);
+        Document d = c.get();
+        Elements els = d.select("div[class^=article] a[href], " + // pravda
+                "tr a[href], div[class^=post] a[href]"); // tabloid
+        for(Element e : els)
+        {
+            String link;
+            String href = e.attr("href");
+            if (href.contains(target)) link = href;
+            else
+            {
+                if (href.contains("http://")) link = href;
+                else link = target + href.substring(1, href.length());
+            }
+            if(!allURLs.contains(link)) allURLs.add(link); //eliminate duplicates
+        }
+        for(String link : allURLs)
+        {
+            result += link + "\r\n";
+        }
+        return result;
     }
 
     /**

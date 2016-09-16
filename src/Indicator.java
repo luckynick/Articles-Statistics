@@ -28,5 +28,13 @@ public enum Indicator
     /**
      * Work on this article in next versions of program
      */
-    SUSPENDED
+    SUSPENDED,
+    /**
+     * In cases of IOEXCEPTION
+     */
+    IOEXCEPTION,
+    /**
+     * For example if URL is wrong
+     */
+    BAD_INPUT
 }

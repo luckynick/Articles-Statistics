@@ -1,0 +1,19 @@
+(12.08.2016  20:19:24) INFO: Work result: 153 titles for now.
+(12.08.2016  20:19:29) INFO: Work result: 153 titles for now.
+(13.08.2016  05:58:29) INFO: Work result: 158 titles for now.
+(13.08.2016  12:37:25) INFO: Work result: 165 titles for now.
+(13.08.2016  18:43:23) INFO: Work result: 171 titles for now.
+(13.08.2016  20:51:18) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(13.08.2016  20:51:28) INFO: Work result: 172 titles for now.
+(14.08.2016  06:04:04) INFO: Work result: 175 titles for now.
+(14.08.2016  12:44:40) INFO: Work result: 179 titles for now.
+(14.08.2016  18:42:01) INFO: Work result: 185 titles for now.
+(14.08.2016  21:57:54) INFO: Work result: 186 titles for now.
+(15.08.2016  06:15:20) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(15.08.2016  06:15:32) INFO: Work result: 189 titles for now.
+(15.08.2016  12:31:07) INFO: Work result: 190 titles for now.
+(15.08.2016  18:34:17) WARNING: Try to read: 1. Problem: java.net.SocketTimeoutException: Read timed out
+(15.08.2016  18:34:29) INFO: Work result: 244 titles for now.
+(16.08.2016  06:01:15) INFO: Work result: 275 titles for now.
+(16.08.2016  17:22:24) INFO: Work result: 331 titles for now.
+(16.08.2016  23:21:10) INFO: Work result: 333 titles for now.

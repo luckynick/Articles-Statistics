@@ -19,7 +19,7 @@ public class Dev
         };
         ArticleBuilder ab = new ArticleBuilder(testCollector);
         boolean raw = false;
-        String testURL = "http://www.pravda.com.ua/news/2016/09/15/7120703/";
+        String testURL = "http://www.eurointegration.com.ua/articles/2016/09/17/7054701/"; //http://www.istpravda.com.ua/short/2016/09/15/149197/
         String target = "http://www.pravda.com.ua/";
         try
         {

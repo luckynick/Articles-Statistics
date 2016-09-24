@@ -32,6 +32,9 @@ public class ArticleBuilder
 
     public Article build(String targetLink)
     {
+        //test
+        System.out.println(targetLink);
+
         long start = System.currentTimeMillis();
         Document doc = null;
         Article a = null;
@@ -76,7 +79,6 @@ public class ArticleBuilder
         a.lock();
 
         //test
-        System.out.println(a.getURL());
         System.out.println(a.getTitle());
         System.out.println(a.getType());
         System.out.println(a.getIndicator().toString());
@@ -168,10 +170,11 @@ public class ArticleBuilder
         }
         a.setDatePublished(selectDate(keyData, outerContent, a));
         a.setAuthor(separateAuthor(outerContent, a));
-        a.setCommented(separateCommented(outerContent.toString()));
         a.setSeen(separateSeen(outerContent.toString()));
+        a.setCommented(separateCommented(outerContent.toString()));
         if(a.getSeen() == -1) a.setSeen(selectSeen(keyData));
         if(a.getCommented() == -1) a.setCommented(selectCommented(keyData));
+        a.setSocial(selectSocial(keyData, a));
     }
 
     private Element getKeyData(Element body, String subSite)
@@ -279,8 +282,8 @@ public class ArticleBuilder
             a.setIndicator(Indicator.REGEX_PATTERN_ERROR);
             return null;
         }
-        datePattern += " z";
-        timeString += " EEST";
+        /*datePattern += " z";
+        timeString += " EEST";*/ //check if program sets time wrong abroad
         df = new SimpleDateFormat(datePattern, locUA);
         Date d = null;
         try
@@ -324,20 +327,28 @@ public class ArticleBuilder
             a.setIndicator(Indicator.REGEX_PATTERN_ERROR);
             return null;
         }
-        boolean found = false;
         for(int i = 0; i < parts.length; i++)
         {
             String s = parts[i];
             Matcher mat = nameSurnPat.matcher(s);
             if(mat.find())
             {
-                found = true;
                 nameSurn = mat.group(1);
                 if(i == 0) containsAuthor.set(parts[1]);
                 else containsAuthor.set(parts[0]);
             }
         } //No pattern error possible. No match found means there is no author in string or format of author is strange
         return nameSurn;
+    }
+
+    public int separateSeen(String content)
+    {
+        Matcher numViewsMat = Pattern.compile("\\p{all}*?([0-9]+)\\s*[Пп]ерегляд\\p{Ll}{1,5}\\p{all}*?").matcher(content);
+        if(numViewsMat.find())
+        {
+            return Integer.parseInt(numViewsMat.group(1));
+        }
+        return -1;
     }
 
     public int separateCommented(String content)
@@ -350,29 +361,36 @@ public class ArticleBuilder
         return -1;
     }
 
-    public int separateSeen(String content)
-    {
-        Matcher numViewsMat = Pattern.compile("\\p{all}*?([0-9]+)\\s*[Пп]ерегляд(?:ів)?\\p{all}*?").matcher(content);
-        if(numViewsMat.find())
-        {
-            return Integer.parseInt(numViewsMat.group(1));
-        }
-        return -1;
-    }
-
     public int selectSeen(Element keyData)
     {
+        Element seenElement = keyData.select("div.post__views").first();
+        if(seenElement == null) return -1;
+        Matcher m = Pattern.compile("\\p{all}*?([0-9]*+)\\p{all}*?").matcher(seenElement.text());
+        if(m.find())
+        {
+            return Integer.parseInt(m.group(1));
+        }
         return -1;
     }
 
     public int selectCommented(Element keyData)
     {
+        Element commentedElement = keyData.select("div.post__comments, a.but5, span.fb_comments_count, " +
+                "div.tit4").first(); //javascript changes html code after document is loaded!!!
+        if(commentedElement == null) return -1;
+        Matcher m = Pattern.compile("\\p{all}*?([0-9]*+)\\p{all}*?").matcher(commentedElement.text());
+        if(m.find())
+        {
+            return Integer.parseInt(m.group(1));
+        }
         return -1;
     }
 
-    public void selectSocial(Element keyData, Article a)
+    public List<Pair<String, Integer>> selectSocial(Element keyData, Article a)
     {
         Element socialBar = keyData.select("div.post__social").first();
+
+        return null;
     }
 
     /**

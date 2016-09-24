@@ -1,5 +1,3 @@
-import org.mozilla.universalchardet.UniversalDetector;
-
 public class ArticlesStatistics
 {
     static final String dataBasePath = "articles_urls.txt";

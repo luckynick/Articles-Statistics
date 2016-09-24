@@ -139,7 +139,7 @@ public class Article
     {
         if(locked)
         {
-            System.out.println("Tried to write to locked article or assigned field.");
+            System.out.println("Tried to write to locked article (indicator).");
             return false;
         }
         this.indicator = indicator;
@@ -148,9 +148,9 @@ public class Article
 
     public boolean setTopics(List<Pair<String, URL>> topics)
     {
-        if(locked || topics != null)
+        if(locked)
         {
-            System.out.println("Tried to write to locked article or assigned field.");
+            System.out.println("Tried to write to locked article (topics).");
             return false;
         }
         this.topics = topics;
@@ -159,9 +159,9 @@ public class Article
 
     public boolean setReadAlso(List<Pair<String, URL>> readAlso)
     {
-        if(locked || readAlso != null)
+        if(locked)
         {
-            System.out.println("Tried to write to locked article or assigned field.");
+            System.out.println("Tried to write to locked article (readAlso).");
             return false;
         }
         this.readAlso = readAlso;
@@ -170,9 +170,9 @@ public class Article
 
     public boolean setSocial(List<Pair<String, Integer>> social)
     {
-        if(locked || social != null)
+        if(locked)
         {
-            System.out.println("Tried to write to locked article or assigned field.");
+            System.out.println("Tried to write to locked article (social).");
             return false;
         }
         this.social = social;
@@ -181,42 +181,44 @@ public class Article
 
     public boolean setLoadTime(long loadTime)
     {
-        if(locked/* || loadTime != -1*/) //think about it
+        if(locked)
         {
-            System.out.println("Tried to write to locked article or assigned field.");
+            System.out.println("Tried to write to locked article (loadTime).");
             return false;
         }
         this.loadTime = loadTime;
         return true;
     }
 
-    public boolean setCommented(int commented)
-    {
-        if(locked || commented != -1)
-        {
-            System.out.println("Tried to write to locked article or assigned field.");
-            return false;
-        }
-        this.commented = commented;
-        return true;
-    }
-
     public boolean setSeen(int seen)
     {
-        if(locked || seen != -1)
+        if(this.seen != -1) return false;
+        if(locked)
         {
-            System.out.println("Tried to write to locked article or assigned field.");
+            System.out.println("Tried to write to locked article (seen).");
             return false;
         }
         this.seen = seen;
         return true;
     }
 
+    public boolean setCommented(int commented)
+    {
+        if(this.commented != -1) return false;
+        if(locked)
+        {
+            System.out.println("Tried to write to locked article (commented).");
+            return false;
+        }
+        this.commented = commented;
+        return true;
+    }
+
     public boolean setAuthor(String author)
     {
-        if(locked || (author != null && !author.equals("") && !author.equals("null")))
+        if(locked)
         {
-            System.out.println("Tried to write to locked article or assigned field.");
+            System.out.println("Tried to write to locked article (author).");
             return false;
         }
         this.author = author;
@@ -227,7 +229,7 @@ public class Article
     {
         if(locked)
         {
-            System.out.println("Tried to write to locked article or assigned field.");
+            System.out.println("Tried to write to locked article (type).");
             return false;
         }
         this.type = type;
@@ -238,7 +240,7 @@ public class Article
     {
         if(locked)
         {
-            System.out.println("Tried to write to locked article or assigned field.");
+            System.out.println("Tried to write to locked article (datePublished).");
             return false;
         }
         this.datePublished = datePublished;
@@ -249,7 +251,7 @@ public class Article
     {
         if(locked)
         {
-            System.out.println("Tried to write to locked article or assigned field.");
+            System.out.println("Tried to write to locked article (description).");
             return false;
         }
         this.description = description;
@@ -260,10 +262,16 @@ public class Article
     {
         if(locked)
         {
-            System.out.println("Tried to write to locked article or assigned field.");
+            System.out.println("Tried to write to locked article (title).");
             return false;
         }
         this.title = title;
+        return true;
+    }
+
+    public static boolean emptyString(String string)
+    {
+        if(string != null && !string.equals("") && !string.equals("null")) return false;
         return true;
     }
 }

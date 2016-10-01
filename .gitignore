@@ -30,7 +30,6 @@ hs_err_pid*
 *.log
 *.sql
 *.sqlite
-*.xml
 
 # OS generated files #
 ######################
